@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @question %>
+<%= render "answers/form", answer: @answer, question: @question %>
+<div>
+  <%= link_to "Edit this question", edit_question_path(@question), class:"btn btn-info" %>
+  <%= link_to "Back to questions", questions_path, class:"btn btn-info" %>
+
+  <%= button_to "Destroy this question", @question, method: :delete, class:"btn btn-danger"%>
+</div>
+<div>
+    <% @answers.each do |answer| %>
+   <p>
+    <%= answer.description %>
+    <%= link_to upvote_answer_path(answer) do %>
+      <i class="fa fa-thumbs-up"></i>
+    <% end %><%= answer.upvotes %>
+
+    <%= link_to downvote_answer_path(answer) do %>
+      <i class="fa fa-thumbs-down" style="color: red;"></i>
+     <% end %><%= answer.downvotes %>
+   </p>
+
+    <% end %>
+</div>

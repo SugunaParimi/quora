@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+<%= render "form", question: @question %>
+<h1>Questions</h1>
+
+<div id="questions">
+  <% @questions.each do |question| %>
+    <%# <%= render question %>
+    <p>
+     <%= link_to question.description, question %>
+     Number of answers: <%= question.answers.size %>
+     <%= link_to upvote_question_path(question) do %>
+      <i class="fa fa-thumbs-up"></i>
+     <% end %><%= question.upvotes %>
+
+    <%= link_to downvote_question_path(question) do %>
+      <i class="fa fa-thumbs-down" style="color: red;"></i>
+     <% end %><%= question.downvotes %>
+    </p>
+
+  <% end %>
+</div>
+
+<%= link_to "New question", new_question_path %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Question votes</h1>
+
+<div id="question_votes">
+  <% @question_votes.each do |question_vote| %>
+    <%= render question_vote %>
+    <p>
+      <%= link_to "Show this question vote", question_vote %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New question vote", new_question_vote_path %>

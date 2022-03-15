@@ -1,0 +1,27 @@
+<%= form_with(model: question_vote) do |form| %>
+  <% if question_vote.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(question_vote.errors.count, "error") %> prohibited this question_vote from being saved:</h2>
+
+      <ul>
+        <% question_vote.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :vote_type, style: "display: block" %>
+    <%= form.text_field :vote_type %>
+  </div>
+
+  <div>
+    <%= form.label :question_id, style: "display: block" %>
+    <%= form.text_field :question_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

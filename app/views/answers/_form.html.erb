@@ -1,0 +1,25 @@
+<%= form_with(model: answer) do |form| %>
+  <% if answer.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+
+      <ul>
+        <% answer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+        <%= form.text_area :description, placeholder: "enter your answer"%>
+  </div>
+
+  <div>
+        <%= form.hidden_field :question_id, value: question.id %>
+  </div>
+
+  <div>
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+<% end %>
