@@ -65,6 +65,6 @@ class AnswerVotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def answer_vote_params
-      params.require(:answer_vote).permit(:vote_type, :answer_id)
+      params.require(:answer_vote).permit(:vote_type, :answer_id, :user_id)
     end
 end

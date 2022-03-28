@@ -19,6 +19,8 @@
     <%= link_to downvote_answer_path(answer) do %>
       <i class="fa fa-thumbs-down" style="color: red;"></i>
      <% end %><%= answer.downvotes %>
+
+     <p>User: <strong> <%= answer.user.email %></strong></p>
    </p>
 
     <% end %>

@@ -8,6 +8,7 @@ class QuestionVotesController < ApplicationController
 
   # GET /question_votes/1 or /question_votes/1.json
   def show
+    
   end
 
   # GET /question_votes/new
@@ -65,6 +66,6 @@ class QuestionVotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_vote_params
-      params.require(:question_vote).permit(:vote_type, :question_id)
+      params.require(:question_vote).permit(:vote_type, :question_id, :user_id)
     end
 end

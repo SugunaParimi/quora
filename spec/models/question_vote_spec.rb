@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: question_votes
+#
+#  id          :bigint           not null, primary key
+#  vote_type   :string
+#  question_id :bigint           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe QuestionVote, type: :model do

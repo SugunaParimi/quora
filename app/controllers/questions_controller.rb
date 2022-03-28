@@ -1,16 +1,20 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[ show edit update destroy upvote downvote ]
-
+  before_action :set_current_user
   # GET /questions or /questions.json
   def index
-    @questions = Question.all
-    @question = Question.new
+    @questions = Question.where(user: current_user)
+    @question = Question.new(user: current_user)
   end
 
   # GET /questions/1 or /questions/1.json
   def show
-    @answers = @question.answers
-    @answer = Answer.new
+    if @question.user == current_user
+      @answers = @question.answers
+      @answer = Answer.new(user: current_user)
+    else
+      redirect_to questions_path, alert: "There is no Question with id #{@question.id}." 
+    end
   end
 
   # GET /questions/new
@@ -71,13 +75,16 @@ class QuestionsController < ApplicationController
   end
 
 private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_question
-      @question = Question.find(params[:id])
-    end
+  def set_current_user
+    @current_user = current_user
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def question_params
-      params.require(:question).permit(:description)
-    end
+  # Only allow a list of trusted parameters through.
+  def question_params
+    params.require(:question).permit(:description, :user_id)
+  end
 end
