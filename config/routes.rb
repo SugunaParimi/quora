@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :questions do
+    collection do
+      get 'all', to: "questions#all_questions"
+    end
     member do
       get 'upvote'
       get 'downvote'

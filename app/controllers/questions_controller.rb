@@ -7,6 +7,11 @@ class QuestionsController < ApplicationController
     @question = Question.new(user: current_user)
   end
 
+  def all_questions
+    @questions = Question.all
+    @question = Question.new(user: current_user)
+  end
+
   # GET /questions/1 or /questions/1.json
   def show
     if @question.user == current_user
@@ -65,12 +70,27 @@ class QuestionsController < ApplicationController
   end
 
   def upvote
-    @question.question_votes.create(vote_type: "UPVOTE");
+    # 1. no self upvote
+    # 2. if a user already upvoted, reverse the upvote if clicks upvote again
+    
+    
+    # if @question.user == current_user
+    #   return redirect_to questions_path, notice: "you cannot self vote"
+    # elsif @question.has_more_than_one_vote?(current_user)
+  if @question.has_more_than_one_vote?(current_user)
+      @question.delete_votes(current_user)
+      return redirect_to questions_path
+    end
+    @question.upvote(current_user)
     redirect_to questions_path
   end
 
   def downvote
-    @question.question_votes.create(vote_type: "DOWNVOTE");
+    if @question.has_more_than_one_vote?(current_user)
+      @question.delete_votes(current_user)
+      return redirect_to questions_path
+    end
+    @question.downvote(current_user)
     redirect_to questions_path
   end
 

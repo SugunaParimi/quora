@@ -59,12 +59,20 @@ class AnswersController < ApplicationController
   end
 
   def upvote
-    @answer.answer_votes.create(vote_type: "UPVOTE");
+    if @answer.has_more_than_one_vote?(current_user)
+      @answer.delete_votes(current_user)
+      return redirect_to @answer.question
+    end
+    @answer.upvote(current_user)
     redirect_to @answer.question
   end
 
   def downvote
-    @answer.answer_votes.create(vote_type: "DOWNVOTE");
+    if @answer.has_more_than_one_vote?(current_user)
+      @answer.delete_votes(current_user)
+      return redirect_to @answer.question
+    end
+    @answer.downvote(current_user)
     redirect_to @answer.question
   end
 
