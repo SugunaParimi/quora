@@ -5,16 +5,25 @@
 <div id="questions">
   <% @questions.each do |question| %>
     <%# <%= render question %>
-    <p>
-     <%= link_to question.description, question %>
-     Number of answers: <%= question.answers.size %>
-     <%= link_to upvote_question_path(question) do %>
+    <div class="card">
+      <div class="card-body">
+      <%= link_to question.description, question %>
+      </div>
+ <%= link_to upvote_question_path(question) do %>
       <i class="fa fa-thumbs-up"></i>
-     <% end %><%= question.upvotes %>
+      <%= question.upvotes %>
+     <% end %>
 
-    <%= link_to downvote_question_path(question) do %>
+     <%= link_to downvote_question_path(question) do %>
       <i class="fa fa-thumbs-down" style="color: red;"></i>
-     <% end %><%= question.downvotes %>
+      <%= question.downvotes %>
+     <% end %>
+    </div>
+     
+     Number of answers: <%= question.answers.size %>
+    
+
+    
     </p>
 
   <% end %>
