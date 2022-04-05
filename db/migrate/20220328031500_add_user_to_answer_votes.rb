@@ -1,4 +1,4 @@
-class AddUserToAnswerVotes < ActiveRecord::Migration[7.0]
+class AddUserToAnswerVotes < ActiveRecord::Migration[6.1]
   def change
     add_reference :answer_votes, :user, null: true, foreign_key: true
   end

@@ -1,4 +1,4 @@
-class CreateAnswerVotes < ActiveRecord::Migration[7.0]
+class CreateAnswerVotes < ActiveRecord::Migration[6.1]
   def change
     create_table :answer_votes do |t|
       t.string :vote_type
